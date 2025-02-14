@@ -1,6 +1,6 @@
 # Example 1
 
-[![Build Status](https://github.com/NelielShander/example_1/actions/workflows/ruby.yml/badge.svg)](https://github.com/NelielShander/example_1/actions/workflows/ruby.yml)
+[![Build Status](https://github.com/NelielShander/example_1/actions/workflows/ci.yml/badge.svg)](https://github.com/NelielShander/example_1/actions/workflows/ci.yml)
 
 Для запуска требуется версия Ruby не ниже 3.0
 
