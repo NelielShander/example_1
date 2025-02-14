@@ -11,7 +11,7 @@ module Sorter
       tempfile = Tempfile.new
 
       IO.foreach(src_path, chomp: true) do |new_line|
-        tempfile = add_new_line(tempfile, new_line)
+        tempfile = add_new_line(tempfile:, new_line:)
       end
 
       IO.copy_stream(tempfile, dst_path)
@@ -24,7 +24,8 @@ module Sorter
 
     private
 
-    def add_new_line(tempfile, new_line)
+    sig { params(tempfile: Tempfile, new_line: String).returns(Tempfile) }
+    def add_new_line(tempfile:, new_line:)
       new_tempfile = Tempfile.new
       is_added = false
 
@@ -42,6 +43,7 @@ module Sorter
       new_tempfile
     end
 
+    sig { params(line: String).returns(::Sorter::Transaction) }
     def new_transaction(line)
       timestamp, transaction_id, user_id, amount = *line.split(',')
       ::Sorter::Transaction.new(timestamp:, transaction_id:, user_id:, amount:)
