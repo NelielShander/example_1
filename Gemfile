@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'dry-struct'
 gem 'dry-monads'
+gem 'rake'
 
 group :development, :test do
   gem 'sorbet'
