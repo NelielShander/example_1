@@ -15,12 +15,7 @@ module Sorter
 
   sig { params(other: String).returns(String) }
   def call(file_name = nil)
-    result = Parser.new(file_name: file_name).parse_file
-
-    if result.success?
-      result.success
-    else
-      result.failure
-    end
+      result = Parser.new(file_name: file_name).parse_file
+      result.success? ? result.success : result.failure
   end
 end

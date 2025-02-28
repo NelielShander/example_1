@@ -1,8 +1,10 @@
 require 'rspec'
 require 'tempfile'
+require_relative '../lib/helper'
 require_relative '../lib/sorter'
 
 RSpec.describe 'Sorter' do
+  include Helper
   before do
     Tempfile.new
     file = File.new(unsorted_path, 'w')
@@ -22,15 +24,17 @@ RSpec.describe 'Sorter' do
     subject { Sorter }
     let(:unsorted_path) { File.join(Sorter::PATH, '../unsorted.csv') }
     let(:sorted_path) { File.join(Sorter::PATH, '../sorted.csv') }
-    let(:lines_count) { 10 }
+    let(:lines_count) { 100 }
 
     it 'creates a sorted transaction file' do
-      result = subject.call
-      amounts = []
-      IO.foreach(sorted_path, chomp: true) { |line| amounts << line.split(',').last.to_f }
+      profile do
+        result = subject.call
+        amounts = []
+        IO.foreach(sorted_path, chomp: true) { |line| amounts << line.split(',').last.to_f }
 
-      expect(result).to eq('Sorting successfully!')
-      expect(amounts.sort.reverse).to eq(amounts)
+        expect(result).to eq('Sorting successfully!')
+        expect(amounts.sort.reverse).to eq(amounts)
+      end
     end
   end
 end
